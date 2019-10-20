@@ -24,7 +24,7 @@ function calculateResults(e) {
     $totalPayment.value = (monthly * calculatedPayments).toFixed(2);
     $totalInterest.value = ((monthly * calculatedPayments) - principal).toFixed(2);
   } else {
-    console.log('please check your numbers');
+    showError('Please check your numbers');
   }
 
   console.log(`
@@ -36,12 +36,30 @@ function calculateResults(e) {
   total interest: ${$totalInterest.value}
   `);
 
-
-  /*
-  loanAmount.value = '';
-  interestAmount.value = '';
-  yearsRepay.value = '';
-  */
   e.preventDefault();
 }
 
+function showError(error) {
+  // Create div
+  const errorDiv = document.createElement('div');
+
+  // Get elements
+  const card = document.querySelector('.card');
+  const heading = document.querySelector('.heading');
+  // Add class
+  errorDiv.className = 'alert alert-danger';
+
+  // Create text node and append to div
+  errorDiv.appendChild(document.createTextNode(error));
+  
+  // Insert error above heading
+  card.insertBefore(errorDiv, heading);
+
+  // Clear error after 3 seconds
+  // setTimeout(clearError, 1000);
+}
+
+// Clear error
+function clearError() {
+  document.querySelector('.alert').remove();
+}
