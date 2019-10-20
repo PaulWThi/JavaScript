@@ -24,6 +24,29 @@ class Person {
   }
 }
 
+class Customer extends Person {
+  constructor(firstName, lastName, phone, membership) {
+    super(firstName, lastName);
+
+    this.phone = phone;
+    this.membership = membership;
+  }
+
+  greeting() {
+    return `How may I help you ${this.firstName} ${this.lastName}`
+  }
+
+  getInfo() {
+    return `Membership ${this.membership} with phone number ${this.phone}`
+  }
+
+  static getMembershipCost() {
+    return 500;
+  }
+
+}
+
+
 const mary = new Person(undefined, 'Williams', '11-13-1980');
 
 console.log(mary);
@@ -34,3 +57,9 @@ mary.getsMarried('Tompson');
 console.log(mary);
 
 console.log(Person.addNumbers(1,2));
+
+const john = new Customer('John', 'Doe', '555-555-5555', 'Standard');
+
+console.log(john.greeting());
+console.log(john.getInfo());
+console.log(Customer.getMembershipCost());
