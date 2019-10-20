@@ -1,8 +1,23 @@
 // Listen for submit
-document.getElementById('loan-form').addEventListener('submit', calculateResults);
+document.getElementById('loan-form').addEventListener('submit', function(e){
+  // Hide results
+  document.getElementById('results').style.display = 'none';
+  // Show loader
+  document.getElementById('loading').style.display = 'block';
 
-function calculateResults(e) {
+  setTimeout(calculateResults, 1000);
+
+  e.preventDefault();
+});
+
+function calculateResults() {
   console.log('calculating...');
+
+  // Remove loader
+  document.getElementById('loading').style.display = 'none';
+
+  // Remove error
+  clearError();
 
   const $loanAmount = document.getElementById('amount');
   const $interestAmount = document.getElementById('interest');
@@ -23,7 +38,11 @@ function calculateResults(e) {
     $monthlyPayment.value = monthly.toFixed(2);
     $totalPayment.value = (monthly * calculatedPayments).toFixed(2);
     $totalInterest.value = ((monthly * calculatedPayments) - principal).toFixed(2);
+    // Show results
+    document.getElementById('results').style.display = 'block';
   } else {
+    // Show results
+    document.getElementById('results').style.display = 'none';
     showError('Please check your numbers');
   }
 
@@ -36,7 +55,7 @@ function calculateResults(e) {
   total interest: ${$totalInterest.value}
   `);
 
-  e.preventDefault();
+
 }
 
 function showError(error) {
@@ -55,11 +74,18 @@ function showError(error) {
   // Insert error above heading
   card.insertBefore(errorDiv, heading);
 
-  // Clear error after 3 seconds
-  // setTimeout(clearError, 1000);
+  // Clear error after 3 seconds -- Depreciated. Want to always show error.
+  //setTimeout(clearError, 3000);
 }
 
 // Clear error
 function clearError() {
-  document.querySelector('.alert').remove();
+  let errorMessage = document.querySelector('.alert');
+  
+  // Check if error message already exists
+  if (errorMessage != null) {
+    errorMessage.remove();
+  } else {
+    console.log('there is no error');
+  }
 }
