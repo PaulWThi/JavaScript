@@ -13,26 +13,26 @@ document.getElementById('loan-form').addEventListener('submit', function(e){
 function calculateResults() {
   console.log('calculating...');
 
-  // Remove loader
+  // Remove loader 
   document.getElementById('loading').style.display = 'none';
 
   // Remove error
   clearError();
 
-  const $loanAmount = document.getElementById('amount');
-  const $interestAmount = document.getElementById('interest');
-  const $yearsRepay = document.getElementById('years');
-  const $monthlyPayment = document.getElementById('monthly-payment');
-  const $totalPayment = document.getElementById('total-payment');
-  const $totalInterest = document.getElementById('total-interest');
+  const $loanAmount = document.getElementById('amount'),
+        $interestAmount = document.getElementById('interest'),
+        $yearsRepay = document.getElementById('years'),
+        $monthlyPayment = document.getElementById('monthly-payment'),
+        $totalPayment = document.getElementById('total-payment'),
+        $totalInterest = document.getElementById('total-interest');
 
-  const principal = parseFloat($loanAmount.value);
-  const calculatedInterest  = parseFloat($interestAmount.value) / 100 / 12;
-  const calculatedPayments = parseFloat($yearsRepay.value) * 12;
+  const principal = parseFloat($loanAmount.value),
+        calculatedInterest  = parseFloat($interestAmount.value) / 100 / 12,
+        calculatedPayments = parseFloat($yearsRepay.value) * 12;
 
   // Compute monthly payment
-  const x = Math.pow(1 + calculatedInterest, calculatedPayments);
-  const monthly = (principal * x * calculatedInterest) / (x - 1);
+  const x = Math.pow(1 + calculatedInterest, calculatedPayments),
+        monthly = (principal * x * calculatedInterest) / (x - 1);
 
   if (isFinite(monthly)) {
     $monthlyPayment.value = monthly.toFixed(2);
@@ -63,8 +63,8 @@ function showError(error) {
   const errorDiv = document.createElement('div');
 
   // Get elements
-  const card = document.querySelector('.card');
-  const heading = document.querySelector('.heading');
+  const card = document.querySelector('.card'),
+        heading = document.querySelector('.heading');
   // Add class
   errorDiv.className = 'alert alert-danger';
 
