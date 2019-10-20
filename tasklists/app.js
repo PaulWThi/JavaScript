@@ -1,9 +1,9 @@
 // Define UI Vars
-const form = document.querySelector('#task-form');
-const taskList = document.querySelector('.collection');
-const clearBtn = document.querySelector('.clear-tasks');
-const filter = document.querySelector('#filter');
-const taskInput = document.querySelector('#task');
+const form = document.querySelector('#task-form'),
+      taskList = document.querySelector('.collection'),
+      clearBtn = document.querySelector('.clear-tasks'),
+      filter = document.querySelector('#filter'),
+      taskInput = document.querySelector('#task');
 
 // Load all event listeners
 loadEventListeners();
@@ -98,8 +98,8 @@ function storeTaskInLocalStorage(task) {
 function removeTask(e) {
   // console.log(e.target)
   if (e.target.parentElement.classList.contains('delete-item')) {
-    const task = e.target.parentElement.parentElement;
-    const taskString = task.textContent;
+    const task = e.target.parentElement.parentElement,
+          taskString = task.textContent;
     if (confirm('You sure?')) {
       console.log(`Deleting: ${taskString}`);
       task.remove();
@@ -142,8 +142,8 @@ function clearTasksFromLocalStorage() {
 
 // Filter tasks
 function filterTasks(e) {
-  const text = e.target.value.toLowerCase();
-  const taskListArray = Array.from(taskList.getElementsByClassName('collection-item'));
+  const text = e.target.value.toLowerCase(),
+        taskListArray = Array.from(taskList.getElementsByClassName('collection-item'));
 
   taskListArray.forEach(function(task) {
     const item = task.firstChild.textContent;
