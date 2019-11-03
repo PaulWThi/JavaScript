@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "company": "123 Designs",
+    "phone": "555-111-222"
+  },
+  {
+    "id": 2,
+    "name": "Paul Thi",
+    "company": "Bottle Rocket",
+    "phone": "518-331-4970"
+  },
+  {
+    "id": 3,
+    "name": "Zoe Liu",
+    "company": "UI/UX Designs",
+    "phone": "518-330-1029"
+  }
+]

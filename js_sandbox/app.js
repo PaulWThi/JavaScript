@@ -1,28 +1,50 @@
-document.querySelector('form').addEventListener('submit',
-function(e) {
-  const task = document.getElementById('task').value;
+document.getElementById('button1').addEventListener('click', loadCustomer);
+document.getElementById('button2').addEventListener('click', loadCustomers);
 
-  let tasks;
+function loadCustomer(e) {
+  const xhr = new XMLHttpRequest();
 
-  if (localStorage.getItem('tasks') === null) {
-    tasks = [];
-  } else {
-    tasks = JSON.parse(localStorage.getItem('tasks'));
+  xhr.open('GET', 'customer.json', true);
+
+  xhr.onload = function() {
+    if(this.status === 200) {
+      const customer = JSON.parse(this.responseText);
+      const output = `
+      <ul>
+        <li>ID: ${customer.id}</li>
+        <li>Name: ${customer.name}</li>
+        <li>ID: ${customer.company}</li>
+        <li>Name: ${customer.phone}</li>
+      </ul>
+      `
+      document.getElementById('customer').innerHTML = output;
+    }
   }
+  xhr.send();
+}
 
-  tasks.push(task);
+function loadCustomers(e) {
+  const xhr = new XMLHttpRequest();
 
-  localStorage.setItem('tasks', JSON.stringify(tasks));
-  alert('Task saved');
+  xhr.open('GET', 'customers.json', true);
 
+  xhr.onload = function() {
+    if(this.status === 200) {
+      const customers = JSON.parse(this.responseText);
+      let output = '';
 
-  
-  e.preventDefault();
-});
-
-
-const tasks = JSON.parse(localStorage.getItem('tasks'));
-
-tasks.forEach(function(task) {
-  console.log(task);
-});
+      customers.forEach(customer => {
+        output += `
+        <ul>
+          <li>ID: ${customer.id}</li>
+          <li>Name: ${customer.name}</li>
+          <li>ID: ${customer.company}</li>
+          <li>Name: ${customer.phone}</li>
+        </ul>
+        `
+      });
+      document.getElementById('customers').innerHTML = output;
+    }
+  }
+  xhr.send();
+}
