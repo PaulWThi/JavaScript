@@ -33,16 +33,20 @@ function loadCustomers(e) {
       const customers = JSON.parse(this.responseText);
       let output = '';
 
-      customers.forEach(customer => {
-        output += `
-        <ul>
-          <li>ID: ${customer.id}</li>
-          <li>Name: ${customer.name}</li>
-          <li>ID: ${customer.company}</li>
-          <li>Name: ${customer.phone}</li>
-        </ul>
-        `
-      });
+      if(this.response.type === 'success') {
+        customers.forEach(customer => {
+          output += `
+          <ul>
+            <li>ID: ${customer.id}</li>
+            <li>Name: ${customer.name}</li>
+            <li>ID: ${customer.company}</li>
+            <li>Name: ${customer.phone}</li>
+          </ul>
+          `
+        });
+      } else {
+        output += '<li>Something went wrong</li>'
+      }
       document.getElementById('customers').innerHTML = output;
     }
   }
