@@ -4,23 +4,15 @@ document.getElementById('button3').addEventListener('click', getExternal);
 
 function getText() {
   fetch('data.txt')
-    .then(function(response) {
-      return response.text();
-    })
-    .then(function(data) {
-      document.getElementById('output').innerHTML = data;
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
+    .then(response => response.text())
+    .then(data => document.getElementById('output').innerHTML = data)
+    .catch(error => console.log(error))
 }
 
 function getJSON() {
   fetch('customers.json')
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
+    .then(reponse => reponse.json())
+    .then(data => {
       console.log(data);
       let output = '';
       data.forEach(function(post) {
@@ -28,17 +20,13 @@ function getJSON() {
       });
       document.getElementById('output').innerHTML = output;
     })
-    .catch(function(error) {
-      console.log(error);
-    });
+    .catch(error => console.log(error))
 }
 
 function getExternal() {
   fetch('https://api.github.com/users')
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
+    .then(response => response.json())
+    .then(data => {
       console.log(data);
       let output = '';
       data.forEach(function(user) {
@@ -46,7 +34,5 @@ function getExternal() {
       });
       document.getElementById('output').innerHTML = output;
     })
-    .catch(function(error) {
-      console.log(error);
-    });
+    .catch(error => console.log(error))
 }
